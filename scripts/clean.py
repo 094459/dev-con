@@ -4,7 +4,7 @@ from io import StringIO
 
 download_http = "http://files.grouplens.org/datasets/movielens/ml-latest-small.zip"
 s3_bucket_name = "mwaa-redshift-094459"
-s3_key = "files/ml-latest-small/"
+s3_key = "files-new/ml-latest-small/"
 cleanKey="_cleanedup.csv"
 
 #repeat for each folder - ratings, movies, links, tags
