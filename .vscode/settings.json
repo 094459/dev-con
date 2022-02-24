@@ -1,0 +1,13 @@
+{
+    "task.problemMatchers.neverPrompt": null,
+    "terminal.integrated.fontFamily": "Hack Nerd Font",
+    "terminal.integrated.shell.osx": "/bin/zsh",
+    "editor.fontSize": 16,
+    "files.exclude": {
+        "**/.classpath": true,
+        "**/.project": true,
+        "**/.settings": true,
+        "**/.factorypath": true
+    },
+    "python.pythonPath": "/Users/ricsue/opt/anaconda3/bin/python3.8"
+}

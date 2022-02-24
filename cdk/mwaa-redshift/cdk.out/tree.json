@@ -1,0 +1,1677 @@
+{
+  "version": "tree-0.1",
+  "tree": {
+    "id": "App",
+    "path": "",
+    "children": {
+      "Tree": {
+        "id": "Tree",
+        "path": "Tree",
+        "constructInfo": {
+          "fqn": "@aws-cdk/core.Construct",
+          "version": "1.127.0"
+        }
+      },
+      "MWAA-Redshift-VPC": {
+        "id": "MWAA-Redshift-VPC",
+        "path": "MWAA-Redshift-VPC",
+        "children": {
+          "MWAA-RedShiftCluster-VPC": {
+            "id": "MWAA-RedShiftCluster-VPC",
+            "path": "MWAA-Redshift-VPC/MWAA-RedShiftCluster-VPC",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "MWAA-Redshift-VPC/MWAA-RedShiftCluster-VPC/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::VPC",
+                  "aws:cdk:cloudformation:props": {
+                    "cidrBlock": "10.192.0.0/16",
+                    "enableDnsHostnames": true,
+                    "enableDnsSupport": true,
+                    "instanceTenancy": "default",
+                    "tags": [
+                      {
+                        "key": "Name",
+                        "value": "MWAA-Redshift-VPC/MWAA-RedShiftCluster-VPC"
+                      }
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-ec2.CfnVPC",
+                  "version": "1.103.0"
+                }
+              },
+              "publicSubnet1": {
+                "id": "publicSubnet1",
+                "path": "MWAA-Redshift-VPC/MWAA-RedShiftCluster-VPC/publicSubnet1",
+                "children": {
+                  "Subnet": {
+                    "id": "Subnet",
+                    "path": "MWAA-Redshift-VPC/MWAA-RedShiftCluster-VPC/publicSubnet1/Subnet",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
+                      "aws:cdk:cloudformation:props": {
+                        "cidrBlock": "10.192.0.0/20",
+                        "vpcId": {
+                          "Ref": "MWAARedShiftClusterVPC89CB7FA5"
+                        },
+                        "availabilityZone": "eu-west-1a",
+                        "mapPublicIpOnLaunch": true,
+                        "tags": [
+                          {
+                            "key": "aws-cdk:subnet-name",
+                            "value": "public"
+                          },
+                          {
+                            "key": "aws-cdk:subnet-type",
+                            "value": "Public"
+                          },
+                          {
+                            "key": "Name",
+                            "value": "MWAA-Redshift-VPC/MWAA-RedShiftCluster-VPC/publicSubnet1"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-ec2.CfnSubnet",
+                      "version": "1.103.0"
+                    }
+                  },
+                  "Acl": {
+                    "id": "Acl",
+                    "path": "MWAA-Redshift-VPC/MWAA-RedShiftCluster-VPC/publicSubnet1/Acl",
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/core.Resource",
+                      "version": "1.127.0"
+                    }
+                  },
+                  "RouteTable": {
+                    "id": "RouteTable",
+                    "path": "MWAA-Redshift-VPC/MWAA-RedShiftCluster-VPC/publicSubnet1/RouteTable",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
+                      "aws:cdk:cloudformation:props": {
+                        "vpcId": {
+                          "Ref": "MWAARedShiftClusterVPC89CB7FA5"
+                        },
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "MWAA-Redshift-VPC/MWAA-RedShiftCluster-VPC/publicSubnet1"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-ec2.CfnRouteTable",
+                      "version": "1.103.0"
+                    }
+                  },
+                  "RouteTableAssociation": {
+                    "id": "RouteTableAssociation",
+                    "path": "MWAA-Redshift-VPC/MWAA-RedShiftCluster-VPC/publicSubnet1/RouteTableAssociation",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "MWAARedShiftClusterVPCpublicSubnet1RouteTable8D30A85C"
+                        },
+                        "subnetId": {
+                          "Ref": "MWAARedShiftClusterVPCpublicSubnet1SubnetFF8374E7"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-ec2.CfnSubnetRouteTableAssociation",
+                      "version": "1.103.0"
+                    }
+                  },
+                  "DefaultRoute": {
+                    "id": "DefaultRoute",
+                    "path": "MWAA-Redshift-VPC/MWAA-RedShiftCluster-VPC/publicSubnet1/DefaultRoute",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Route",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "MWAARedShiftClusterVPCpublicSubnet1RouteTable8D30A85C"
+                        },
+                        "destinationCidrBlock": "0.0.0.0/0",
+                        "gatewayId": {
+                          "Ref": "MWAARedShiftClusterVPCIGW9DA839BC"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-ec2.CfnRoute",
+                      "version": "1.103.0"
+                    }
+                  },
+                  "EIP": {
+                    "id": "EIP",
+                    "path": "MWAA-Redshift-VPC/MWAA-RedShiftCluster-VPC/publicSubnet1/EIP",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::EIP",
+                      "aws:cdk:cloudformation:props": {
+                        "domain": "vpc",
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "MWAA-Redshift-VPC/MWAA-RedShiftCluster-VPC/publicSubnet1"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-ec2.CfnEIP",
+                      "version": "1.103.0"
+                    }
+                  },
+                  "NATGateway": {
+                    "id": "NATGateway",
+                    "path": "MWAA-Redshift-VPC/MWAA-RedShiftCluster-VPC/publicSubnet1/NATGateway",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::NatGateway",
+                      "aws:cdk:cloudformation:props": {
+                        "allocationId": {
+                          "Fn::GetAtt": [
+                            "MWAARedShiftClusterVPCpublicSubnet1EIPF839E29F",
+                            "AllocationId"
+                          ]
+                        },
+                        "subnetId": {
+                          "Ref": "MWAARedShiftClusterVPCpublicSubnet1SubnetFF8374E7"
+                        },
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "MWAA-Redshift-VPC/MWAA-RedShiftCluster-VPC/publicSubnet1"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-ec2.CfnNatGateway",
+                      "version": "1.103.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-ec2.PublicSubnet",
+                  "version": "1.103.0"
+                }
+              },
+              "publicSubnet2": {
+                "id": "publicSubnet2",
+                "path": "MWAA-Redshift-VPC/MWAA-RedShiftCluster-VPC/publicSubnet2",
+                "children": {
+                  "Subnet": {
+                    "id": "Subnet",
+                    "path": "MWAA-Redshift-VPC/MWAA-RedShiftCluster-VPC/publicSubnet2/Subnet",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
+                      "aws:cdk:cloudformation:props": {
+                        "cidrBlock": "10.192.16.0/20",
+                        "vpcId": {
+                          "Ref": "MWAARedShiftClusterVPC89CB7FA5"
+                        },
+                        "availabilityZone": "eu-west-1b",
+                        "mapPublicIpOnLaunch": true,
+                        "tags": [
+                          {
+                            "key": "aws-cdk:subnet-name",
+                            "value": "public"
+                          },
+                          {
+                            "key": "aws-cdk:subnet-type",
+                            "value": "Public"
+                          },
+                          {
+                            "key": "Name",
+                            "value": "MWAA-Redshift-VPC/MWAA-RedShiftCluster-VPC/publicSubnet2"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-ec2.CfnSubnet",
+                      "version": "1.103.0"
+                    }
+                  },
+                  "Acl": {
+                    "id": "Acl",
+                    "path": "MWAA-Redshift-VPC/MWAA-RedShiftCluster-VPC/publicSubnet2/Acl",
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/core.Resource",
+                      "version": "1.127.0"
+                    }
+                  },
+                  "RouteTable": {
+                    "id": "RouteTable",
+                    "path": "MWAA-Redshift-VPC/MWAA-RedShiftCluster-VPC/publicSubnet2/RouteTable",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
+                      "aws:cdk:cloudformation:props": {
+                        "vpcId": {
+                          "Ref": "MWAARedShiftClusterVPC89CB7FA5"
+                        },
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "MWAA-Redshift-VPC/MWAA-RedShiftCluster-VPC/publicSubnet2"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-ec2.CfnRouteTable",
+                      "version": "1.103.0"
+                    }
+                  },
+                  "RouteTableAssociation": {
+                    "id": "RouteTableAssociation",
+                    "path": "MWAA-Redshift-VPC/MWAA-RedShiftCluster-VPC/publicSubnet2/RouteTableAssociation",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "MWAARedShiftClusterVPCpublicSubnet2RouteTable66DDC7CC"
+                        },
+                        "subnetId": {
+                          "Ref": "MWAARedShiftClusterVPCpublicSubnet2SubnetF71C9AF5"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-ec2.CfnSubnetRouteTableAssociation",
+                      "version": "1.103.0"
+                    }
+                  },
+                  "DefaultRoute": {
+                    "id": "DefaultRoute",
+                    "path": "MWAA-Redshift-VPC/MWAA-RedShiftCluster-VPC/publicSubnet2/DefaultRoute",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Route",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "MWAARedShiftClusterVPCpublicSubnet2RouteTable66DDC7CC"
+                        },
+                        "destinationCidrBlock": "0.0.0.0/0",
+                        "gatewayId": {
+                          "Ref": "MWAARedShiftClusterVPCIGW9DA839BC"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-ec2.CfnRoute",
+                      "version": "1.103.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-ec2.PublicSubnet",
+                  "version": "1.103.0"
+                }
+              },
+              "privateSubnet1": {
+                "id": "privateSubnet1",
+                "path": "MWAA-Redshift-VPC/MWAA-RedShiftCluster-VPC/privateSubnet1",
+                "children": {
+                  "Subnet": {
+                    "id": "Subnet",
+                    "path": "MWAA-Redshift-VPC/MWAA-RedShiftCluster-VPC/privateSubnet1/Subnet",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
+                      "aws:cdk:cloudformation:props": {
+                        "cidrBlock": "10.192.32.0/20",
+                        "vpcId": {
+                          "Ref": "MWAARedShiftClusterVPC89CB7FA5"
+                        },
+                        "availabilityZone": "eu-west-1a",
+                        "mapPublicIpOnLaunch": false,
+                        "tags": [
+                          {
+                            "key": "aws-cdk:subnet-name",
+                            "value": "private"
+                          },
+                          {
+                            "key": "aws-cdk:subnet-type",
+                            "value": "Private"
+                          },
+                          {
+                            "key": "Name",
+                            "value": "MWAA-Redshift-VPC/MWAA-RedShiftCluster-VPC/privateSubnet1"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-ec2.CfnSubnet",
+                      "version": "1.103.0"
+                    }
+                  },
+                  "Acl": {
+                    "id": "Acl",
+                    "path": "MWAA-Redshift-VPC/MWAA-RedShiftCluster-VPC/privateSubnet1/Acl",
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/core.Resource",
+                      "version": "1.127.0"
+                    }
+                  },
+                  "RouteTable": {
+                    "id": "RouteTable",
+                    "path": "MWAA-Redshift-VPC/MWAA-RedShiftCluster-VPC/privateSubnet1/RouteTable",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
+                      "aws:cdk:cloudformation:props": {
+                        "vpcId": {
+                          "Ref": "MWAARedShiftClusterVPC89CB7FA5"
+                        },
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "MWAA-Redshift-VPC/MWAA-RedShiftCluster-VPC/privateSubnet1"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-ec2.CfnRouteTable",
+                      "version": "1.103.0"
+                    }
+                  },
+                  "RouteTableAssociation": {
+                    "id": "RouteTableAssociation",
+                    "path": "MWAA-Redshift-VPC/MWAA-RedShiftCluster-VPC/privateSubnet1/RouteTableAssociation",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "MWAARedShiftClusterVPCprivateSubnet1RouteTableF0B7B234"
+                        },
+                        "subnetId": {
+                          "Ref": "MWAARedShiftClusterVPCprivateSubnet1SubnetE53020E3"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-ec2.CfnSubnetRouteTableAssociation",
+                      "version": "1.103.0"
+                    }
+                  },
+                  "DefaultRoute": {
+                    "id": "DefaultRoute",
+                    "path": "MWAA-Redshift-VPC/MWAA-RedShiftCluster-VPC/privateSubnet1/DefaultRoute",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Route",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "MWAARedShiftClusterVPCprivateSubnet1RouteTableF0B7B234"
+                        },
+                        "destinationCidrBlock": "0.0.0.0/0",
+                        "natGatewayId": {
+                          "Ref": "MWAARedShiftClusterVPCpublicSubnet1NATGatewayDA519235"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-ec2.CfnRoute",
+                      "version": "1.103.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-ec2.PrivateSubnet",
+                  "version": "1.103.0"
+                }
+              },
+              "privateSubnet2": {
+                "id": "privateSubnet2",
+                "path": "MWAA-Redshift-VPC/MWAA-RedShiftCluster-VPC/privateSubnet2",
+                "children": {
+                  "Subnet": {
+                    "id": "Subnet",
+                    "path": "MWAA-Redshift-VPC/MWAA-RedShiftCluster-VPC/privateSubnet2/Subnet",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
+                      "aws:cdk:cloudformation:props": {
+                        "cidrBlock": "10.192.48.0/20",
+                        "vpcId": {
+                          "Ref": "MWAARedShiftClusterVPC89CB7FA5"
+                        },
+                        "availabilityZone": "eu-west-1b",
+                        "mapPublicIpOnLaunch": false,
+                        "tags": [
+                          {
+                            "key": "aws-cdk:subnet-name",
+                            "value": "private"
+                          },
+                          {
+                            "key": "aws-cdk:subnet-type",
+                            "value": "Private"
+                          },
+                          {
+                            "key": "Name",
+                            "value": "MWAA-Redshift-VPC/MWAA-RedShiftCluster-VPC/privateSubnet2"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-ec2.CfnSubnet",
+                      "version": "1.103.0"
+                    }
+                  },
+                  "Acl": {
+                    "id": "Acl",
+                    "path": "MWAA-Redshift-VPC/MWAA-RedShiftCluster-VPC/privateSubnet2/Acl",
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/core.Resource",
+                      "version": "1.127.0"
+                    }
+                  },
+                  "RouteTable": {
+                    "id": "RouteTable",
+                    "path": "MWAA-Redshift-VPC/MWAA-RedShiftCluster-VPC/privateSubnet2/RouteTable",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
+                      "aws:cdk:cloudformation:props": {
+                        "vpcId": {
+                          "Ref": "MWAARedShiftClusterVPC89CB7FA5"
+                        },
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "MWAA-Redshift-VPC/MWAA-RedShiftCluster-VPC/privateSubnet2"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-ec2.CfnRouteTable",
+                      "version": "1.103.0"
+                    }
+                  },
+                  "RouteTableAssociation": {
+                    "id": "RouteTableAssociation",
+                    "path": "MWAA-Redshift-VPC/MWAA-RedShiftCluster-VPC/privateSubnet2/RouteTableAssociation",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "MWAARedShiftClusterVPCprivateSubnet2RouteTable3D5AE5EA"
+                        },
+                        "subnetId": {
+                          "Ref": "MWAARedShiftClusterVPCprivateSubnet2Subnet285AA36B"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-ec2.CfnSubnetRouteTableAssociation",
+                      "version": "1.103.0"
+                    }
+                  },
+                  "DefaultRoute": {
+                    "id": "DefaultRoute",
+                    "path": "MWAA-Redshift-VPC/MWAA-RedShiftCluster-VPC/privateSubnet2/DefaultRoute",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Route",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "MWAARedShiftClusterVPCprivateSubnet2RouteTable3D5AE5EA"
+                        },
+                        "destinationCidrBlock": "0.0.0.0/0",
+                        "natGatewayId": {
+                          "Ref": "MWAARedShiftClusterVPCpublicSubnet1NATGatewayDA519235"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-ec2.CfnRoute",
+                      "version": "1.103.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-ec2.PrivateSubnet",
+                  "version": "1.103.0"
+                }
+              },
+              "IGW": {
+                "id": "IGW",
+                "path": "MWAA-Redshift-VPC/MWAA-RedShiftCluster-VPC/IGW",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::InternetGateway",
+                  "aws:cdk:cloudformation:props": {
+                    "tags": [
+                      {
+                        "key": "Name",
+                        "value": "MWAA-Redshift-VPC/MWAA-RedShiftCluster-VPC"
+                      }
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-ec2.CfnInternetGateway",
+                  "version": "1.103.0"
+                }
+              },
+              "VPCGW": {
+                "id": "VPCGW",
+                "path": "MWAA-Redshift-VPC/MWAA-RedShiftCluster-VPC/VPCGW",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::VPCGatewayAttachment",
+                  "aws:cdk:cloudformation:props": {
+                    "vpcId": {
+                      "Ref": "MWAARedShiftClusterVPC89CB7FA5"
+                    },
+                    "internetGatewayId": {
+                      "Ref": "MWAARedShiftClusterVPCIGW9DA839BC"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-ec2.CfnVPCGatewayAttachment",
+                  "version": "1.103.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/aws-ec2.Vpc",
+              "version": "1.103.0"
+            }
+          },
+          "VPCId": {
+            "id": "VPCId",
+            "path": "MWAA-Redshift-VPC/VPCId",
+            "constructInfo": {
+              "fqn": "@aws-cdk/core.CfnOutput",
+              "version": "1.127.0"
+            }
+          },
+          "CDKMetadata": {
+            "id": "CDKMetadata",
+            "path": "MWAA-Redshift-VPC/CDKMetadata",
+            "children": {
+              "Default": {
+                "id": "Default",
+                "path": "MWAA-Redshift-VPC/CDKMetadata/Default",
+                "constructInfo": {
+                  "fqn": "@aws-cdk/core.CfnResource",
+                  "version": "1.127.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/core.Construct",
+              "version": "1.127.0"
+            }
+          },
+          "Exports": {
+            "id": "Exports",
+            "path": "MWAA-Redshift-VPC/Exports",
+            "children": {
+              "Output{\"Fn::GetAtt\":[\"MWAARedShiftClusterVPC89CB7FA5\",\"DefaultSecurityGroup\"]}": {
+                "id": "Output{\"Fn::GetAtt\":[\"MWAARedShiftClusterVPC89CB7FA5\",\"DefaultSecurityGroup\"]}",
+                "path": "MWAA-Redshift-VPC/Exports/Output{\"Fn::GetAtt\":[\"MWAARedShiftClusterVPC89CB7FA5\",\"DefaultSecurityGroup\"]}",
+                "constructInfo": {
+                  "fqn": "@aws-cdk/core.CfnOutput",
+                  "version": "1.127.0"
+                }
+              },
+              "Output{\"Ref\":\"MWAARedShiftClusterVPCprivateSubnet1SubnetE53020E3\"}": {
+                "id": "Output{\"Ref\":\"MWAARedShiftClusterVPCprivateSubnet1SubnetE53020E3\"}",
+                "path": "MWAA-Redshift-VPC/Exports/Output{\"Ref\":\"MWAARedShiftClusterVPCprivateSubnet1SubnetE53020E3\"}",
+                "constructInfo": {
+                  "fqn": "@aws-cdk/core.CfnOutput",
+                  "version": "1.127.0"
+                }
+              },
+              "Output{\"Ref\":\"MWAARedShiftClusterVPCprivateSubnet2Subnet285AA36B\"}": {
+                "id": "Output{\"Ref\":\"MWAARedShiftClusterVPCprivateSubnet2Subnet285AA36B\"}",
+                "path": "MWAA-Redshift-VPC/Exports/Output{\"Ref\":\"MWAARedShiftClusterVPCprivateSubnet2Subnet285AA36B\"}",
+                "constructInfo": {
+                  "fqn": "@aws-cdk/core.CfnOutput",
+                  "version": "1.127.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/core.Construct",
+              "version": "1.127.0"
+            }
+          }
+        },
+        "constructInfo": {
+          "fqn": "@aws-cdk/core.Stack",
+          "version": "1.127.0"
+        }
+      },
+      "MWAA-Redshift-Cluster": {
+        "id": "MWAA-Redshift-Cluster",
+        "path": "MWAA-Redshift-Cluster",
+        "children": {
+          "mwaa-redshift import": {
+            "id": "mwaa-redshift import",
+            "path": "MWAA-Redshift-Cluster/mwaa-redshift import",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "MWAA-Redshift-Cluster/mwaa-redshift import/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::S3::Bucket",
+                  "aws:cdk:cloudformation:props": {
+                    "bucketName": "mwaa-redshift-094459",
+                    "publicAccessBlockConfiguration": {
+                      "blockPublicAcls": true,
+                      "blockPublicPolicy": true,
+                      "ignorePublicAcls": true,
+                      "restrictPublicBuckets": true
+                    },
+                    "versioningConfiguration": {
+                      "status": "Enabled"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-s3.CfnBucket",
+                  "version": "1.103.0"
+                }
+              },
+              "Notifications": {
+                "id": "Notifications",
+                "path": "MWAA-Redshift-Cluster/mwaa-redshift import/Notifications",
+                "constructInfo": {
+                  "fqn": "@aws-cdk/core.Construct",
+                  "version": "1.127.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/aws-s3.Bucket",
+              "version": "1.103.0"
+            }
+          },
+          "File": {
+            "id": "File",
+            "path": "MWAA-Redshift-Cluster/File",
+            "children": {
+              "AwsCliLayer": {
+                "id": "AwsCliLayer",
+                "path": "MWAA-Redshift-Cluster/File/AwsCliLayer",
+                "children": {
+                  "Code": {
+                    "id": "Code",
+                    "path": "MWAA-Redshift-Cluster/File/AwsCliLayer/Code",
+                    "children": {
+                      "Stage": {
+                        "id": "Stage",
+                        "path": "MWAA-Redshift-Cluster/File/AwsCliLayer/Code/Stage",
+                        "constructInfo": {
+                          "fqn": "@aws-cdk/core.AssetStaging",
+                          "version": "1.127.0"
+                        }
+                      },
+                      "AssetBucket": {
+                        "id": "AssetBucket",
+                        "path": "MWAA-Redshift-Cluster/File/AwsCliLayer/Code/AssetBucket",
+                        "constructInfo": {
+                          "fqn": "@aws-cdk/core.Resource",
+                          "version": "1.127.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-s3-assets.Asset",
+                      "version": "1.103.0"
+                    }
+                  },
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "MWAA-Redshift-Cluster/File/AwsCliLayer/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::Lambda::LayerVersion",
+                      "aws:cdk:cloudformation:props": {
+                        "content": {
+                          "s3Bucket": {
+                            "Ref": "AssetParameterse9882ab123687399f934da0d45effe675ecc8ce13b40cb946f3e1d6141fe8d68S3BucketAEADE8C7"
+                          },
+                          "s3Key": {
+                            "Fn::Join": [
+                              "",
+                              [
+                                {
+                                  "Fn::Select": [
+                                    0,
+                                    {
+                                      "Fn::Split": [
+                                        "||",
+                                        {
+                                          "Ref": "AssetParameterse9882ab123687399f934da0d45effe675ecc8ce13b40cb946f3e1d6141fe8d68S3VersionKeyE415415F"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "Fn::Select": [
+                                    1,
+                                    {
+                                      "Fn::Split": [
+                                        "||",
+                                        {
+                                          "Ref": "AssetParameterse9882ab123687399f934da0d45effe675ecc8ce13b40cb946f3e1d6141fe8d68S3VersionKeyE415415F"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            ]
+                          }
+                        },
+                        "description": "/opt/awscli/aws"
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-lambda.CfnLayerVersion",
+                      "version": "1.103.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/lambda-layer-awscli.AwsCliLayer",
+                  "version": "1.100.0"
+                }
+              },
+              "CustomResourceHandler": {
+                "id": "CustomResourceHandler",
+                "path": "MWAA-Redshift-Cluster/File/CustomResourceHandler",
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-lambda.SingletonFunction",
+                  "version": "1.103.0"
+                }
+              },
+              "Asset1": {
+                "id": "Asset1",
+                "path": "MWAA-Redshift-Cluster/File/Asset1",
+                "children": {
+                  "Stage": {
+                    "id": "Stage",
+                    "path": "MWAA-Redshift-Cluster/File/Asset1/Stage",
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/core.AssetStaging",
+                      "version": "1.127.0"
+                    }
+                  },
+                  "AssetBucket": {
+                    "id": "AssetBucket",
+                    "path": "MWAA-Redshift-Cluster/File/Asset1/AssetBucket",
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/core.Resource",
+                      "version": "1.127.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-s3-assets.Asset",
+                  "version": "1.103.0"
+                }
+              },
+              "CustomResource": {
+                "id": "CustomResource",
+                "path": "MWAA-Redshift-Cluster/File/CustomResource",
+                "children": {
+                  "Default": {
+                    "id": "Default",
+                    "path": "MWAA-Redshift-Cluster/File/CustomResource/Default",
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/core.CfnResource",
+                      "version": "1.127.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/core.CustomResource",
+                  "version": "1.127.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/aws-s3-deployment.BucketDeployment",
+              "version": "1.100.0"
+            }
+          },
+          "AssetParameters": {
+            "id": "AssetParameters",
+            "path": "MWAA-Redshift-Cluster/AssetParameters",
+            "children": {
+              "e9882ab123687399f934da0d45effe675ecc8ce13b40cb946f3e1d6141fe8d68": {
+                "id": "e9882ab123687399f934da0d45effe675ecc8ce13b40cb946f3e1d6141fe8d68",
+                "path": "MWAA-Redshift-Cluster/AssetParameters/e9882ab123687399f934da0d45effe675ecc8ce13b40cb946f3e1d6141fe8d68",
+                "children": {
+                  "S3Bucket": {
+                    "id": "S3Bucket",
+                    "path": "MWAA-Redshift-Cluster/AssetParameters/e9882ab123687399f934da0d45effe675ecc8ce13b40cb946f3e1d6141fe8d68/S3Bucket",
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/core.CfnParameter",
+                      "version": "1.127.0"
+                    }
+                  },
+                  "S3VersionKey": {
+                    "id": "S3VersionKey",
+                    "path": "MWAA-Redshift-Cluster/AssetParameters/e9882ab123687399f934da0d45effe675ecc8ce13b40cb946f3e1d6141fe8d68/S3VersionKey",
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/core.CfnParameter",
+                      "version": "1.127.0"
+                    }
+                  },
+                  "ArtifactHash": {
+                    "id": "ArtifactHash",
+                    "path": "MWAA-Redshift-Cluster/AssetParameters/e9882ab123687399f934da0d45effe675ecc8ce13b40cb946f3e1d6141fe8d68/ArtifactHash",
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/core.CfnParameter",
+                      "version": "1.127.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/core.Construct",
+                  "version": "1.127.0"
+                }
+              },
+              "c24b999656e4fe6c609c31bae56a1cf4717a405619c3aa6ba1bc686b8c2c86cf": {
+                "id": "c24b999656e4fe6c609c31bae56a1cf4717a405619c3aa6ba1bc686b8c2c86cf",
+                "path": "MWAA-Redshift-Cluster/AssetParameters/c24b999656e4fe6c609c31bae56a1cf4717a405619c3aa6ba1bc686b8c2c86cf",
+                "children": {
+                  "S3Bucket": {
+                    "id": "S3Bucket",
+                    "path": "MWAA-Redshift-Cluster/AssetParameters/c24b999656e4fe6c609c31bae56a1cf4717a405619c3aa6ba1bc686b8c2c86cf/S3Bucket",
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/core.CfnParameter",
+                      "version": "1.127.0"
+                    }
+                  },
+                  "S3VersionKey": {
+                    "id": "S3VersionKey",
+                    "path": "MWAA-Redshift-Cluster/AssetParameters/c24b999656e4fe6c609c31bae56a1cf4717a405619c3aa6ba1bc686b8c2c86cf/S3VersionKey",
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/core.CfnParameter",
+                      "version": "1.127.0"
+                    }
+                  },
+                  "ArtifactHash": {
+                    "id": "ArtifactHash",
+                    "path": "MWAA-Redshift-Cluster/AssetParameters/c24b999656e4fe6c609c31bae56a1cf4717a405619c3aa6ba1bc686b8c2c86cf/ArtifactHash",
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/core.CfnParameter",
+                      "version": "1.127.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/core.Construct",
+                  "version": "1.127.0"
+                }
+              },
+              "2fbe20bb2b229ad1e071dca3196c05434b367afeb522719eba901993be2837e9": {
+                "id": "2fbe20bb2b229ad1e071dca3196c05434b367afeb522719eba901993be2837e9",
+                "path": "MWAA-Redshift-Cluster/AssetParameters/2fbe20bb2b229ad1e071dca3196c05434b367afeb522719eba901993be2837e9",
+                "children": {
+                  "S3Bucket": {
+                    "id": "S3Bucket",
+                    "path": "MWAA-Redshift-Cluster/AssetParameters/2fbe20bb2b229ad1e071dca3196c05434b367afeb522719eba901993be2837e9/S3Bucket",
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/core.CfnParameter",
+                      "version": "1.127.0"
+                    }
+                  },
+                  "S3VersionKey": {
+                    "id": "S3VersionKey",
+                    "path": "MWAA-Redshift-Cluster/AssetParameters/2fbe20bb2b229ad1e071dca3196c05434b367afeb522719eba901993be2837e9/S3VersionKey",
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/core.CfnParameter",
+                      "version": "1.127.0"
+                    }
+                  },
+                  "ArtifactHash": {
+                    "id": "ArtifactHash",
+                    "path": "MWAA-Redshift-Cluster/AssetParameters/2fbe20bb2b229ad1e071dca3196c05434b367afeb522719eba901993be2837e9/ArtifactHash",
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/core.CfnParameter",
+                      "version": "1.127.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/core.Construct",
+                  "version": "1.127.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/core.Construct",
+              "version": "1.127.0"
+            }
+          },
+          "Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C": {
+            "id": "Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C",
+            "path": "MWAA-Redshift-Cluster/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C",
+            "children": {
+              "ServiceRole": {
+                "id": "ServiceRole",
+                "path": "MWAA-Redshift-Cluster/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/ServiceRole",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "MWAA-Redshift-Cluster/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/ServiceRole/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                      "aws:cdk:cloudformation:props": {
+                        "assumeRolePolicyDocument": {
+                          "Statement": [
+                            {
+                              "Action": "sts:AssumeRole",
+                              "Effect": "Allow",
+                              "Principal": {
+                                "Service": "lambda.amazonaws.com"
+                              }
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        },
+                        "managedPolicyArns": [
+                          {
+                            "Fn::Join": [
+                              "",
+                              [
+                                "arn:",
+                                {
+                                  "Ref": "AWS::Partition"
+                                },
+                                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+                              ]
+                            ]
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-iam.CfnRole",
+                      "version": "1.103.0"
+                    }
+                  },
+                  "DefaultPolicy": {
+                    "id": "DefaultPolicy",
+                    "path": "MWAA-Redshift-Cluster/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/ServiceRole/DefaultPolicy",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "MWAA-Redshift-Cluster/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/ServiceRole/DefaultPolicy/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                          "aws:cdk:cloudformation:props": {
+                            "policyDocument": {
+                              "Statement": [
+                                {
+                                  "Action": [
+                                    "s3:GetObject*",
+                                    "s3:GetBucket*",
+                                    "s3:List*"
+                                  ],
+                                  "Effect": "Allow",
+                                  "Resource": [
+                                    {
+                                      "Fn::Join": [
+                                        "",
+                                        [
+                                          "arn:",
+                                          {
+                                            "Ref": "AWS::Partition"
+                                          },
+                                          ":s3:::",
+                                          {
+                                            "Ref": "AssetParameters2fbe20bb2b229ad1e071dca3196c05434b367afeb522719eba901993be2837e9S3BucketBBD139EA"
+                                          }
+                                        ]
+                                      ]
+                                    },
+                                    {
+                                      "Fn::Join": [
+                                        "",
+                                        [
+                                          "arn:",
+                                          {
+                                            "Ref": "AWS::Partition"
+                                          },
+                                          ":s3:::",
+                                          {
+                                            "Ref": "AssetParameters2fbe20bb2b229ad1e071dca3196c05434b367afeb522719eba901993be2837e9S3BucketBBD139EA"
+                                          },
+                                          "/*"
+                                        ]
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "Action": [
+                                    "s3:GetObject*",
+                                    "s3:GetBucket*",
+                                    "s3:List*",
+                                    "s3:DeleteObject*",
+                                    "s3:PutObject",
+                                    "s3:Abort*"
+                                  ],
+                                  "Effect": "Allow",
+                                  "Resource": [
+                                    {
+                                      "Fn::GetAtt": [
+                                        "mwaaredshiftimport2270C1C7",
+                                        "Arn"
+                                      ]
+                                    },
+                                    {
+                                      "Fn::Join": [
+                                        "",
+                                        [
+                                          {
+                                            "Fn::GetAtt": [
+                                              "mwaaredshiftimport2270C1C7",
+                                              "Arn"
+                                            ]
+                                          },
+                                          "/*"
+                                        ]
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ],
+                              "Version": "2012-10-17"
+                            },
+                            "policyName": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRoleDefaultPolicy88902FDF",
+                            "roles": [
+                              {
+                                "Ref": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRole89A01265"
+                              }
+                            ]
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "@aws-cdk/aws-iam.CfnPolicy",
+                          "version": "1.103.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-iam.Policy",
+                      "version": "1.103.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-iam.Role",
+                  "version": "1.103.0"
+                }
+              },
+              "Code": {
+                "id": "Code",
+                "path": "MWAA-Redshift-Cluster/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/Code",
+                "children": {
+                  "Stage": {
+                    "id": "Stage",
+                    "path": "MWAA-Redshift-Cluster/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/Code/Stage",
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/core.AssetStaging",
+                      "version": "1.127.0"
+                    }
+                  },
+                  "AssetBucket": {
+                    "id": "AssetBucket",
+                    "path": "MWAA-Redshift-Cluster/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/Code/AssetBucket",
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/core.Resource",
+                      "version": "1.127.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-s3-assets.Asset",
+                  "version": "1.103.0"
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "MWAA-Redshift-Cluster/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
+                  "aws:cdk:cloudformation:props": {
+                    "code": {
+                      "s3Bucket": {
+                        "Ref": "AssetParametersc24b999656e4fe6c609c31bae56a1cf4717a405619c3aa6ba1bc686b8c2c86cfS3Bucket55EFA30C"
+                      },
+                      "s3Key": {
+                        "Fn::Join": [
+                          "",
+                          [
+                            {
+                              "Fn::Select": [
+                                0,
+                                {
+                                  "Fn::Split": [
+                                    "||",
+                                    {
+                                      "Ref": "AssetParametersc24b999656e4fe6c609c31bae56a1cf4717a405619c3aa6ba1bc686b8c2c86cfS3VersionKey60329B70"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "Fn::Select": [
+                                1,
+                                {
+                                  "Fn::Split": [
+                                    "||",
+                                    {
+                                      "Ref": "AssetParametersc24b999656e4fe6c609c31bae56a1cf4717a405619c3aa6ba1bc686b8c2c86cfS3VersionKey60329B70"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        ]
+                      }
+                    },
+                    "role": {
+                      "Fn::GetAtt": [
+                        "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRole89A01265",
+                        "Arn"
+                      ]
+                    },
+                    "handler": "index.handler",
+                    "layers": [
+                      {
+                        "Ref": "FileAwsCliLayerEAB29CA3"
+                      }
+                    ],
+                    "runtime": "python3.6",
+                    "timeout": 900
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-lambda.CfnFunction",
+                  "version": "1.103.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/aws-lambda.Function",
+              "version": "1.103.0"
+            }
+          },
+          "mwaa-dag-bucket": {
+            "id": "mwaa-dag-bucket",
+            "path": "MWAA-Redshift-Cluster/mwaa-dag-bucket",
+            "constructInfo": {
+              "fqn": "@aws-cdk/core.Resource",
+              "version": "1.127.0"
+            }
+          },
+          "mwaa-redshift-service-role2nd": {
+            "id": "mwaa-redshift-service-role2nd",
+            "path": "MWAA-Redshift-Cluster/mwaa-redshift-service-role2nd",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "MWAA-Redshift-Cluster/mwaa-redshift-service-role2nd/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                  "aws:cdk:cloudformation:props": {
+                    "assumeRolePolicyDocument": {
+                      "Statement": [
+                        {
+                          "Action": "sts:AssumeRole",
+                          "Effect": "Allow",
+                          "Principal": {
+                            "Service": "redshift.amazonaws.com"
+                          }
+                        }
+                      ],
+                      "Version": "2012-10-17"
+                    },
+                    "policies": [
+                      {
+                        "policyName": "mwaaRedshiftPolicyDocument",
+                        "policyDocument": {
+                          "Statement": [
+                            {
+                              "Action": "s3:*",
+                              "Effect": "Allow",
+                              "Resource": [
+                                {
+                                  "Fn::Join": [
+                                    "",
+                                    [
+                                      {
+                                        "Fn::GetAtt": [
+                                          "mwaaredshiftimport2270C1C7",
+                                          "Arn"
+                                        ]
+                                      },
+                                      "/*"
+                                    ]
+                                  ]
+                                },
+                                {
+                                  "Fn::GetAtt": [
+                                    "mwaaredshiftimport2270C1C7",
+                                    "Arn"
+                                  ]
+                                },
+                                {
+                                  "Fn::Join": [
+                                    "",
+                                    [
+                                      "arn:",
+                                      {
+                                        "Ref": "AWS::Partition"
+                                      },
+                                      ":s3:::airflow-timestream-demo/*"
+                                    ]
+                                  ]
+                                },
+                                {
+                                  "Fn::Join": [
+                                    "",
+                                    [
+                                      "arn:",
+                                      {
+                                        "Ref": "AWS::Partition"
+                                      },
+                                      ":s3:::airflow-timestream-demo"
+                                    ]
+                                  ]
+                                }
+                              ]
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        }
+                      }
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-iam.CfnRole",
+                  "version": "1.103.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/aws-iam.Role",
+              "version": "1.103.0"
+            }
+          },
+          "MWAARedshiftSG": {
+            "id": "MWAARedshiftSG",
+            "path": "MWAA-Redshift-Cluster/MWAARedshiftSG",
+            "children": {
+              "from MWAARedshiftClusterMWAARedshiftSGF7A6E947:5439": {
+                "id": "from MWAARedshiftClusterMWAARedshiftSGF7A6E947:5439",
+                "path": "MWAA-Redshift-Cluster/MWAARedshiftSG/from MWAARedshiftClusterMWAARedshiftSGF7A6E947:5439",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroupIngress",
+                  "aws:cdk:cloudformation:props": {
+                    "ipProtocol": "tcp",
+                    "description": "from MWAARedshiftClusterMWAARedshiftSGF7A6E947:5439",
+                    "fromPort": 5439,
+                    "groupId": {
+                      "Fn::ImportValue": "MWAA-Redshift-VPC:ExportsOutputFnGetAttMWAARedShiftClusterVPC89CB7FA5DefaultSecurityGroupB40B8DA8"
+                    },
+                    "sourceSecurityGroupId": {
+                      "Fn::ImportValue": "MWAA-Redshift-VPC:ExportsOutputFnGetAttMWAARedShiftClusterVPC89CB7FA5DefaultSecurityGroupB40B8DA8"
+                    },
+                    "toPort": 5439
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-ec2.CfnSecurityGroupIngress",
+                  "version": "1.103.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/core.Resource",
+              "version": "1.127.0"
+            }
+          },
+          "SG": {
+            "id": "SG",
+            "path": "MWAA-Redshift-Cluster/SG",
+            "children": {
+              "from 0.0.0.0_0:5439": {
+                "id": "from 0.0.0.0_0:5439",
+                "path": "MWAA-Redshift-Cluster/SG/from 0.0.0.0_0:5439",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroupIngress",
+                  "aws:cdk:cloudformation:props": {
+                    "ipProtocol": "tcp",
+                    "cidrIp": "0.0.0.0/0",
+                    "description": "allow redshift access",
+                    "fromPort": 5439,
+                    "groupId": "sg-0f920a406d470ae35",
+                    "toPort": 5439
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-ec2.CfnSecurityGroupIngress",
+                  "version": "1.103.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/core.Resource",
+              "version": "1.127.0"
+            }
+          },
+          "RedshiftCSG": {
+            "id": "RedshiftCSG",
+            "path": "MWAA-Redshift-Cluster/RedshiftCSG",
+            "children": {
+              "Default": {
+                "id": "Default",
+                "path": "MWAA-Redshift-Cluster/RedshiftCSG/Default",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Redshift::ClusterSubnetGroup",
+                  "aws:cdk:cloudformation:props": {
+                    "description": "Redshift Cluster Subnet Group",
+                    "subnetIds": [
+                      {
+                        "Fn::ImportValue": "MWAA-Redshift-VPC:ExportsOutputRefMWAARedShiftClusterVPCprivateSubnet1SubnetE53020E3AEF66202"
+                      },
+                      {
+                        "Fn::ImportValue": "MWAA-Redshift-VPC:ExportsOutputRefMWAARedShiftClusterVPCprivateSubnet2Subnet285AA36B7B3F54CD"
+                      }
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-redshift.CfnClusterSubnetGroup",
+                  "version": "1.103.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/aws-redshift.ClusterSubnetGroup",
+              "version": "1.103.0"
+            }
+          },
+          "MWAA VPC": {
+            "id": "MWAA VPC",
+            "path": "MWAA-Redshift-Cluster/MWAA VPC",
+            "children": {
+              "PublicSubnet1": {
+                "id": "PublicSubnet1",
+                "path": "MWAA-Redshift-Cluster/MWAA VPC/PublicSubnet1",
+                "constructInfo": {
+                  "fqn": "@aws-cdk/core.Resource",
+                  "version": "1.127.0"
+                }
+              },
+              "PublicSubnet2": {
+                "id": "PublicSubnet2",
+                "path": "MWAA-Redshift-Cluster/MWAA VPC/PublicSubnet2",
+                "constructInfo": {
+                  "fqn": "@aws-cdk/core.Resource",
+                  "version": "1.127.0"
+                }
+              },
+              "PrivateSubnet1": {
+                "id": "PrivateSubnet1",
+                "path": "MWAA-Redshift-Cluster/MWAA VPC/PrivateSubnet1",
+                "constructInfo": {
+                  "fqn": "@aws-cdk/core.Resource",
+                  "version": "1.127.0"
+                }
+              },
+              "PrivateSubnet2": {
+                "id": "PrivateSubnet2",
+                "path": "MWAA-Redshift-Cluster/MWAA VPC/PrivateSubnet2",
+                "constructInfo": {
+                  "fqn": "@aws-cdk/core.Resource",
+                  "version": "1.127.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/core.Resource",
+              "version": "1.127.0"
+            }
+          },
+          "MWAAVPERedshiftCSG": {
+            "id": "MWAAVPERedshiftCSG",
+            "path": "MWAA-Redshift-Cluster/MWAAVPERedshiftCSG",
+            "attributes": {
+              "aws:cdk:cloudformation:type": "AWS::Redshift::ClusterSubnetGroup",
+              "aws:cdk:cloudformation:props": {
+                "description": "MWAA VPE Redshift Cluster Subnet Group",
+                "subnetIds": [
+                  "subnet-0493dffd0282f4368",
+                  "subnet-08f416023356ff6d2",
+                  "subnet-0dd0b9e0c8a41cf06",
+                  "subnet-079c0728127763578"
+                ]
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/aws-redshift.CfnClusterSubnetGroup",
+              "version": "1.103.0"
+            }
+          },
+          "MWAARedshiftCluster": {
+            "id": "MWAARedshiftCluster",
+            "path": "MWAA-Redshift-Cluster/MWAARedshiftCluster",
+            "children": {
+              "Secret": {
+                "id": "Secret",
+                "path": "MWAA-Redshift-Cluster/MWAARedshiftCluster/Secret",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "MWAA-Redshift-Cluster/MWAARedshiftCluster/Secret/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::SecretsManager::Secret",
+                      "aws:cdk:cloudformation:props": {
+                        "generateSecretString": {
+                          "passwordLength": 30,
+                          "secretStringTemplate": "{\"username\":\"awsuser\"}",
+                          "generateStringKey": "password",
+                          "excludeCharacters": "\"@/\\ '"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-secretsmanager.CfnSecret",
+                      "version": "1.129.0"
+                    }
+                  },
+                  "Attachment": {
+                    "id": "Attachment",
+                    "path": "MWAA-Redshift-Cluster/MWAARedshiftCluster/Secret/Attachment",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "MWAA-Redshift-Cluster/MWAARedshiftCluster/Secret/Attachment/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::SecretsManager::SecretTargetAttachment",
+                          "aws:cdk:cloudformation:props": {
+                            "secretId": {
+                              "Ref": "MWAARedshiftClusterSecret9BB025F4"
+                            },
+                            "targetId": {
+                              "Ref": "MWAARedshiftClusterD2771D0C"
+                            },
+                            "targetType": "AWS::Redshift::Cluster"
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "@aws-cdk/aws-secretsmanager.CfnSecretTargetAttachment",
+                          "version": "1.129.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-secretsmanager.SecretTargetAttachment",
+                      "version": "1.129.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-redshift.DatabaseSecret",
+                  "version": "1.103.0"
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "MWAA-Redshift-Cluster/MWAARedshiftCluster/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Redshift::Cluster",
+                  "aws:cdk:cloudformation:props": {
+                    "clusterType": "multi-node",
+                    "dbName": "mwaa",
+                    "masterUsername": {
+                      "Fn::Join": [
+                        "",
+                        [
+                          "{{resolve:secretsmanager:",
+                          {
+                            "Ref": "MWAARedshiftClusterSecret9BB025F4"
+                          },
+                          ":SecretString:username::}}"
+                        ]
+                      ]
+                    },
+                    "masterUserPassword": {
+                      "Fn::Join": [
+                        "",
+                        [
+                          "{{resolve:secretsmanager:",
+                          {
+                            "Ref": "MWAARedshiftClusterSecret9BB025F4"
+                          },
+                          ":SecretString:password::}}"
+                        ]
+                      ]
+                    },
+                    "nodeType": "ra3.4xlarge",
+                    "allowVersionUpgrade": true,
+                    "automatedSnapshotRetentionPeriod": 1,
+                    "clusterIdentifier": "mwaa-redshift-cluster",
+                    "clusterSubnetGroupName": {
+                      "Ref": "RedshiftCSG"
+                    },
+                    "encrypted": true,
+                    "iamRoles": [
+                      {
+                        "Fn::GetAtt": [
+                          "mwaaredshiftservicerole2nd6338575C",
+                          "Arn"
+                        ]
+                      }
+                    ],
+                    "numberOfNodes": 2,
+                    "publiclyAccessible": false,
+                    "vpcSecurityGroupIds": [
+                      {
+                        "Fn::ImportValue": "MWAA-Redshift-VPC:ExportsOutputFnGetAttMWAARedShiftClusterVPC89CB7FA5DefaultSecurityGroupB40B8DA8"
+                      }
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-redshift.CfnCluster",
+                  "version": "1.103.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/aws-redshift.Cluster",
+              "version": "1.103.0"
+            }
+          },
+          "RedshiftSecretARN :": {
+            "id": "RedshiftSecretARN :",
+            "path": "MWAA-Redshift-Cluster/RedshiftSecretARN :",
+            "constructInfo": {
+              "fqn": "@aws-cdk/core.CfnOutput",
+              "version": "1.127.0"
+            }
+          },
+          "RedshiftIAMARN :": {
+            "id": "RedshiftIAMARN :",
+            "path": "MWAA-Redshift-Cluster/RedshiftIAMARN :",
+            "constructInfo": {
+              "fqn": "@aws-cdk/core.CfnOutput",
+              "version": "1.127.0"
+            }
+          },
+          "RedshiftClusterEndpoint :": {
+            "id": "RedshiftClusterEndpoint :",
+            "path": "MWAA-Redshift-Cluster/RedshiftClusterEndpoint :",
+            "constructInfo": {
+              "fqn": "@aws-cdk/core.CfnOutput",
+              "version": "1.127.0"
+            }
+          },
+          "MWAAVPCESG :": {
+            "id": "MWAAVPCESG :",
+            "path": "MWAA-Redshift-Cluster/MWAAVPCESG :",
+            "constructInfo": {
+              "fqn": "@aws-cdk/core.CfnOutput",
+              "version": "1.127.0"
+            }
+          },
+          "redshiftvpcendpointcli": {
+            "id": "redshiftvpcendpointcli",
+            "path": "MWAA-Redshift-Cluster/redshiftvpcendpointcli",
+            "constructInfo": {
+              "fqn": "@aws-cdk/core.CfnOutput",
+              "version": "1.127.0"
+            }
+          },
+          "CDKMetadata": {
+            "id": "CDKMetadata",
+            "path": "MWAA-Redshift-Cluster/CDKMetadata",
+            "children": {
+              "Default": {
+                "id": "Default",
+                "path": "MWAA-Redshift-Cluster/CDKMetadata/Default",
+                "constructInfo": {
+                  "fqn": "@aws-cdk/core.CfnResource",
+                  "version": "1.127.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/core.Construct",
+              "version": "1.127.0"
+            }
+          }
+        },
+        "constructInfo": {
+          "fqn": "@aws-cdk/core.Stack",
+          "version": "1.127.0"
+        }
+      }
+    },
+    "constructInfo": {
+      "fqn": "@aws-cdk/core.App",
+      "version": "1.127.0"
+    }
+  }
+}

@@ -1,0 +1,656 @@
+{
+  "Resources": {
+    "mwaaredshiftimport2270C1C7": {
+      "Type": "AWS::S3::Bucket",
+      "Properties": {
+        "BucketName": "mwaa-redshift-094459",
+        "PublicAccessBlockConfiguration": {
+          "BlockPublicAcls": true,
+          "BlockPublicPolicy": true,
+          "IgnorePublicAcls": true,
+          "RestrictPublicBuckets": true
+        },
+        "VersioningConfiguration": {
+          "Status": "Enabled"
+        }
+      },
+      "UpdateReplacePolicy": "Retain",
+      "DeletionPolicy": "Retain",
+      "Metadata": {
+        "aws:cdk:path": "MWAA-Redshift-Cluster/mwaa-redshift import/Resource"
+      }
+    },
+    "FileAwsCliLayerEAB29CA3": {
+      "Type": "AWS::Lambda::LayerVersion",
+      "Properties": {
+        "Content": {
+          "S3Bucket": {
+            "Ref": "AssetParameterse9882ab123687399f934da0d45effe675ecc8ce13b40cb946f3e1d6141fe8d68S3BucketAEADE8C7"
+          },
+          "S3Key": {
+            "Fn::Join": [
+              "",
+              [
+                {
+                  "Fn::Select": [
+                    0,
+                    {
+                      "Fn::Split": [
+                        "||",
+                        {
+                          "Ref": "AssetParameterse9882ab123687399f934da0d45effe675ecc8ce13b40cb946f3e1d6141fe8d68S3VersionKeyE415415F"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "Fn::Select": [
+                    1,
+                    {
+                      "Fn::Split": [
+                        "||",
+                        {
+                          "Ref": "AssetParameterse9882ab123687399f934da0d45effe675ecc8ce13b40cb946f3e1d6141fe8d68S3VersionKeyE415415F"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            ]
+          }
+        },
+        "Description": "/opt/awscli/aws"
+      },
+      "Metadata": {
+        "aws:cdk:path": "MWAA-Redshift-Cluster/File/AwsCliLayer/Resource",
+        "aws:asset:path": "asset.e9882ab123687399f934da0d45effe675ecc8ce13b40cb946f3e1d6141fe8d68.zip",
+        "aws:asset:property": "Content"
+      }
+    },
+    "FileCustomResource3172DF79": {
+      "Type": "Custom::CDKBucketDeployment",
+      "Properties": {
+        "ServiceToken": {
+          "Fn::GetAtt": [
+            "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C81C01536",
+            "Arn"
+          ]
+        },
+        "SourceBucketNames": [
+          {
+            "Ref": "AssetParameters2fbe20bb2b229ad1e071dca3196c05434b367afeb522719eba901993be2837e9S3BucketBBD139EA"
+          }
+        ],
+        "SourceObjectKeys": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                {
+                  "Fn::Select": [
+                    0,
+                    {
+                      "Fn::Split": [
+                        "||",
+                        {
+                          "Ref": "AssetParameters2fbe20bb2b229ad1e071dca3196c05434b367afeb522719eba901993be2837e9S3VersionKey147E4096"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "Fn::Select": [
+                    1,
+                    {
+                      "Fn::Split": [
+                        "||",
+                        {
+                          "Ref": "AssetParameters2fbe20bb2b229ad1e071dca3196c05434b367afeb522719eba901993be2837e9S3VersionKey147E4096"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            ]
+          }
+        ],
+        "DestinationBucketName": {
+          "Ref": "mwaaredshiftimport2270C1C7"
+        },
+        "DestinationBucketKeyPrefix": "files/",
+        "RetainOnDelete": false,
+        "Prune": false
+      },
+      "UpdateReplacePolicy": "Delete",
+      "DeletionPolicy": "Delete",
+      "Metadata": {
+        "aws:cdk:path": "MWAA-Redshift-Cluster/File/CustomResource/Default"
+      }
+    },
+    "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRole89A01265": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com"
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+              ]
+            ]
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "MWAA-Redshift-Cluster/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/ServiceRole/Resource"
+      }
+    },
+    "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRoleDefaultPolicy88902FDF": {
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "s3:GetObject*",
+                "s3:GetBucket*",
+                "s3:List*"
+              ],
+              "Effect": "Allow",
+              "Resource": [
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":s3:::",
+                      {
+                        "Ref": "AssetParameters2fbe20bb2b229ad1e071dca3196c05434b367afeb522719eba901993be2837e9S3BucketBBD139EA"
+                      }
+                    ]
+                  ]
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":s3:::",
+                      {
+                        "Ref": "AssetParameters2fbe20bb2b229ad1e071dca3196c05434b367afeb522719eba901993be2837e9S3BucketBBD139EA"
+                      },
+                      "/*"
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "Action": [
+                "s3:GetObject*",
+                "s3:GetBucket*",
+                "s3:List*",
+                "s3:DeleteObject*",
+                "s3:PutObject",
+                "s3:Abort*"
+              ],
+              "Effect": "Allow",
+              "Resource": [
+                {
+                  "Fn::GetAtt": [
+                    "mwaaredshiftimport2270C1C7",
+                    "Arn"
+                  ]
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      {
+                        "Fn::GetAtt": [
+                          "mwaaredshiftimport2270C1C7",
+                          "Arn"
+                        ]
+                      },
+                      "/*"
+                    ]
+                  ]
+                }
+              ]
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "PolicyName": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRoleDefaultPolicy88902FDF",
+        "Roles": [
+          {
+            "Ref": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRole89A01265"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "MWAA-Redshift-Cluster/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/ServiceRole/DefaultPolicy/Resource"
+      }
+    },
+    "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C81C01536": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Ref": "AssetParametersc24b999656e4fe6c609c31bae56a1cf4717a405619c3aa6ba1bc686b8c2c86cfS3Bucket55EFA30C"
+          },
+          "S3Key": {
+            "Fn::Join": [
+              "",
+              [
+                {
+                  "Fn::Select": [
+                    0,
+                    {
+                      "Fn::Split": [
+                        "||",
+                        {
+                          "Ref": "AssetParametersc24b999656e4fe6c609c31bae56a1cf4717a405619c3aa6ba1bc686b8c2c86cfS3VersionKey60329B70"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "Fn::Select": [
+                    1,
+                    {
+                      "Fn::Split": [
+                        "||",
+                        {
+                          "Ref": "AssetParametersc24b999656e4fe6c609c31bae56a1cf4717a405619c3aa6ba1bc686b8c2c86cfS3VersionKey60329B70"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            ]
+          }
+        },
+        "Role": {
+          "Fn::GetAtt": [
+            "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRole89A01265",
+            "Arn"
+          ]
+        },
+        "Handler": "index.handler",
+        "Layers": [
+          {
+            "Ref": "FileAwsCliLayerEAB29CA3"
+          }
+        ],
+        "Runtime": "python3.6",
+        "Timeout": 900
+      },
+      "DependsOn": [
+        "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRoleDefaultPolicy88902FDF",
+        "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRole89A01265"
+      ],
+      "Metadata": {
+        "aws:cdk:path": "MWAA-Redshift-Cluster/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/Resource",
+        "aws:asset:path": "asset.c24b999656e4fe6c609c31bae56a1cf4717a405619c3aa6ba1bc686b8c2c86cf",
+        "aws:asset:property": "Code"
+      }
+    },
+    "mwaaredshiftservicerole2nd6338575C": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "redshift.amazonaws.com"
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "Policies": [
+          {
+            "PolicyDocument": {
+              "Statement": [
+                {
+                  "Action": "s3:*",
+                  "Effect": "Allow",
+                  "Resource": [
+                    {
+                      "Fn::Join": [
+                        "",
+                        [
+                          {
+                            "Fn::GetAtt": [
+                              "mwaaredshiftimport2270C1C7",
+                              "Arn"
+                            ]
+                          },
+                          "/*"
+                        ]
+                      ]
+                    },
+                    {
+                      "Fn::GetAtt": [
+                        "mwaaredshiftimport2270C1C7",
+                        "Arn"
+                      ]
+                    },
+                    {
+                      "Fn::Join": [
+                        "",
+                        [
+                          "arn:",
+                          {
+                            "Ref": "AWS::Partition"
+                          },
+                          ":s3:::airflow-timestream-demo/*"
+                        ]
+                      ]
+                    },
+                    {
+                      "Fn::Join": [
+                        "",
+                        [
+                          "arn:",
+                          {
+                            "Ref": "AWS::Partition"
+                          },
+                          ":s3:::airflow-timestream-demo"
+                        ]
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "Version": "2012-10-17"
+            },
+            "PolicyName": "mwaaRedshiftPolicyDocument"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "MWAA-Redshift-Cluster/mwaa-redshift-service-role2nd/Resource"
+      }
+    },
+    "MWAARedshiftSGfromMWAARedshiftClusterMWAARedshiftSGF7A6E94754396BD55A29": {
+      "Type": "AWS::EC2::SecurityGroupIngress",
+      "Properties": {
+        "IpProtocol": "tcp",
+        "Description": "from MWAARedshiftClusterMWAARedshiftSGF7A6E947:5439",
+        "FromPort": 5439,
+        "GroupId": {
+          "Fn::ImportValue": "MWAA-Redshift-VPC:ExportsOutputFnGetAttMWAARedShiftClusterVPC89CB7FA5DefaultSecurityGroupB40B8DA8"
+        },
+        "SourceSecurityGroupId": {
+          "Fn::ImportValue": "MWAA-Redshift-VPC:ExportsOutputFnGetAttMWAARedShiftClusterVPC89CB7FA5DefaultSecurityGroupB40B8DA8"
+        },
+        "ToPort": 5439
+      },
+      "Metadata": {
+        "aws:cdk:path": "MWAA-Redshift-Cluster/MWAARedshiftSG/from MWAARedshiftClusterMWAARedshiftSGF7A6E947:5439"
+      }
+    },
+    "SGfrom000005439C230926D": {
+      "Type": "AWS::EC2::SecurityGroupIngress",
+      "Properties": {
+        "IpProtocol": "tcp",
+        "CidrIp": "0.0.0.0/0",
+        "Description": "allow redshift access",
+        "FromPort": 5439,
+        "GroupId": "sg-0f920a406d470ae35",
+        "ToPort": 5439
+      },
+      "Metadata": {
+        "aws:cdk:path": "MWAA-Redshift-Cluster/SG/from 0.0.0.0_0:5439"
+      }
+    },
+    "RedshiftCSG": {
+      "Type": "AWS::Redshift::ClusterSubnetGroup",
+      "Properties": {
+        "Description": "Redshift Cluster Subnet Group",
+        "SubnetIds": [
+          {
+            "Fn::ImportValue": "MWAA-Redshift-VPC:ExportsOutputRefMWAARedShiftClusterVPCprivateSubnet1SubnetE53020E3AEF66202"
+          },
+          {
+            "Fn::ImportValue": "MWAA-Redshift-VPC:ExportsOutputRefMWAARedShiftClusterVPCprivateSubnet2Subnet285AA36B7B3F54CD"
+          }
+        ]
+      },
+      "UpdateReplacePolicy": "Retain",
+      "DeletionPolicy": "Retain",
+      "Metadata": {
+        "aws:cdk:path": "MWAA-Redshift-Cluster/RedshiftCSG/Default"
+      }
+    },
+    "MWAAVPERedshiftCSG": {
+      "Type": "AWS::Redshift::ClusterSubnetGroup",
+      "Properties": {
+        "Description": "MWAA VPE Redshift Cluster Subnet Group",
+        "SubnetIds": [
+          "subnet-0493dffd0282f4368",
+          "subnet-08f416023356ff6d2",
+          "subnet-0dd0b9e0c8a41cf06",
+          "subnet-079c0728127763578"
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "MWAA-Redshift-Cluster/MWAAVPERedshiftCSG"
+      }
+    },
+    "MWAARedshiftClusterSecret9BB025F4": {
+      "Type": "AWS::SecretsManager::Secret",
+      "Properties": {
+        "GenerateSecretString": {
+          "ExcludeCharacters": "\"@/\\ '",
+          "GenerateStringKey": "password",
+          "PasswordLength": 30,
+          "SecretStringTemplate": "{\"username\":\"awsuser\"}"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "MWAA-Redshift-Cluster/MWAARedshiftCluster/Secret/Resource"
+      }
+    },
+    "MWAARedshiftClusterSecretAttachment5A531A65": {
+      "Type": "AWS::SecretsManager::SecretTargetAttachment",
+      "Properties": {
+        "SecretId": {
+          "Ref": "MWAARedshiftClusterSecret9BB025F4"
+        },
+        "TargetId": {
+          "Ref": "MWAARedshiftClusterD2771D0C"
+        },
+        "TargetType": "AWS::Redshift::Cluster"
+      },
+      "Metadata": {
+        "aws:cdk:path": "MWAA-Redshift-Cluster/MWAARedshiftCluster/Secret/Attachment/Resource"
+      }
+    },
+    "MWAARedshiftClusterD2771D0C": {
+      "Type": "AWS::Redshift::Cluster",
+      "Properties": {
+        "ClusterType": "multi-node",
+        "DBName": "mwaa",
+        "MasterUsername": {
+          "Fn::Join": [
+            "",
+            [
+              "{{resolve:secretsmanager:",
+              {
+                "Ref": "MWAARedshiftClusterSecret9BB025F4"
+              },
+              ":SecretString:username::}}"
+            ]
+          ]
+        },
+        "MasterUserPassword": {
+          "Fn::Join": [
+            "",
+            [
+              "{{resolve:secretsmanager:",
+              {
+                "Ref": "MWAARedshiftClusterSecret9BB025F4"
+              },
+              ":SecretString:password::}}"
+            ]
+          ]
+        },
+        "NodeType": "ra3.4xlarge",
+        "AllowVersionUpgrade": true,
+        "AutomatedSnapshotRetentionPeriod": 1,
+        "ClusterIdentifier": "mwaa-redshift-cluster",
+        "ClusterSubnetGroupName": {
+          "Ref": "RedshiftCSG"
+        },
+        "Encrypted": true,
+        "IamRoles": [
+          {
+            "Fn::GetAtt": [
+              "mwaaredshiftservicerole2nd6338575C",
+              "Arn"
+            ]
+          }
+        ],
+        "NumberOfNodes": 2,
+        "PubliclyAccessible": false,
+        "VpcSecurityGroupIds": [
+          {
+            "Fn::ImportValue": "MWAA-Redshift-VPC:ExportsOutputFnGetAttMWAARedShiftClusterVPC89CB7FA5DefaultSecurityGroupB40B8DA8"
+          }
+        ]
+      },
+      "UpdateReplacePolicy": "Delete",
+      "DeletionPolicy": "Delete",
+      "Metadata": {
+        "aws:cdk:path": "MWAA-Redshift-Cluster/MWAARedshiftCluster/Resource"
+      }
+    },
+    "CDKMetadata": {
+      "Type": "AWS::CDK::Metadata",
+      "Properties": {
+        "Analytics": "v2:deflate64:H4sIAAAAAAAA/21RXU/DMAz8LXtPs48KAW+MTSAkJKYV8Z5lXheWJpPtaKqq/neSdIxp4sln5+Q7X6aym87u5WT0pE5U6O1hrD2C7CpW+iAW3hFj0CzmRMBxWBtXizWQD6hBLAKxb/7anbvGK4WqAQZMzUfgY+BeTCfltVqqHZWyew76AJyYA+oFlYVKqiSzuLCq2WyV7CLlXbWAX4BkvBNVtGSBvXsJTnOaXECk/uJeGNXIbu3t4DPVlbdGt9lqRr0APZOxrUAHNNy+og/HN1cjEAmELe3NjqMDG+8GrMLGAWdO2vHfdBiJpWK1UQRxLw5Hnl/6FMjkOpAugXj6Fo7Wtw04lkMgy8vgnERhUwpF5Gtr5PxEC2tyMHHn7PE2ZMrS1CinasCc4tnNUD4V1sBzjv++zyIXwu1L9Lxqee/duJQP8m70TcYUGBybBuR6qD+WTa7yVwIAAA=="
+      },
+      "Metadata": {
+        "aws:cdk:path": "MWAA-Redshift-Cluster/CDKMetadata/Default"
+      }
+    }
+  },
+  "Parameters": {
+    "AssetParameterse9882ab123687399f934da0d45effe675ecc8ce13b40cb946f3e1d6141fe8d68S3BucketAEADE8C7": {
+      "Type": "String",
+      "Description": "S3 bucket for asset \"e9882ab123687399f934da0d45effe675ecc8ce13b40cb946f3e1d6141fe8d68\""
+    },
+    "AssetParameterse9882ab123687399f934da0d45effe675ecc8ce13b40cb946f3e1d6141fe8d68S3VersionKeyE415415F": {
+      "Type": "String",
+      "Description": "S3 key for asset version \"e9882ab123687399f934da0d45effe675ecc8ce13b40cb946f3e1d6141fe8d68\""
+    },
+    "AssetParameterse9882ab123687399f934da0d45effe675ecc8ce13b40cb946f3e1d6141fe8d68ArtifactHashD9A515C3": {
+      "Type": "String",
+      "Description": "Artifact hash for asset \"e9882ab123687399f934da0d45effe675ecc8ce13b40cb946f3e1d6141fe8d68\""
+    },
+    "AssetParametersc24b999656e4fe6c609c31bae56a1cf4717a405619c3aa6ba1bc686b8c2c86cfS3Bucket55EFA30C": {
+      "Type": "String",
+      "Description": "S3 bucket for asset \"c24b999656e4fe6c609c31bae56a1cf4717a405619c3aa6ba1bc686b8c2c86cf\""
+    },
+    "AssetParametersc24b999656e4fe6c609c31bae56a1cf4717a405619c3aa6ba1bc686b8c2c86cfS3VersionKey60329B70": {
+      "Type": "String",
+      "Description": "S3 key for asset version \"c24b999656e4fe6c609c31bae56a1cf4717a405619c3aa6ba1bc686b8c2c86cf\""
+    },
+    "AssetParametersc24b999656e4fe6c609c31bae56a1cf4717a405619c3aa6ba1bc686b8c2c86cfArtifactHash85F58E48": {
+      "Type": "String",
+      "Description": "Artifact hash for asset \"c24b999656e4fe6c609c31bae56a1cf4717a405619c3aa6ba1bc686b8c2c86cf\""
+    },
+    "AssetParameters2fbe20bb2b229ad1e071dca3196c05434b367afeb522719eba901993be2837e9S3BucketBBD139EA": {
+      "Type": "String",
+      "Description": "S3 bucket for asset \"2fbe20bb2b229ad1e071dca3196c05434b367afeb522719eba901993be2837e9\""
+    },
+    "AssetParameters2fbe20bb2b229ad1e071dca3196c05434b367afeb522719eba901993be2837e9S3VersionKey147E4096": {
+      "Type": "String",
+      "Description": "S3 key for asset version \"2fbe20bb2b229ad1e071dca3196c05434b367afeb522719eba901993be2837e9\""
+    },
+    "AssetParameters2fbe20bb2b229ad1e071dca3196c05434b367afeb522719eba901993be2837e9ArtifactHashBB8884B6": {
+      "Type": "String",
+      "Description": "Artifact hash for asset \"2fbe20bb2b229ad1e071dca3196c05434b367afeb522719eba901993be2837e9\""
+    }
+  },
+  "Outputs": {
+    "RedshiftSecretARN": {
+      "Description": "This is the Redshift Secret ARN",
+      "Value": {
+        "Ref": "MWAARedshiftClusterSecretAttachment5A531A65"
+      }
+    },
+    "RedshiftIAMARN": {
+      "Description": "This is the Redshift IAM ARN",
+      "Value": {
+        "Fn::GetAtt": [
+          "mwaaredshiftservicerole2nd6338575C",
+          "Arn"
+        ]
+      }
+    },
+    "RedshiftClusterEndpoint": {
+      "Description": "This is the Redshift Cluster Endpoint",
+      "Value": {
+        "Fn::GetAtt": [
+          "MWAARedshiftClusterD2771D0C",
+          "Endpoint.Address"
+        ]
+      }
+    },
+    "MWAAVPCESG": {
+      "Description": "This is the VPE Subnet Group to use when creating the VPC Endpoint",
+      "Value": {
+        "Ref": "MWAAVPERedshiftCSG"
+      }
+    },
+    "redshiftvpcendpointcli": {
+      "Description": "Use this command to create your vpce",
+      "Value": {
+        "Fn::Join": [
+          "",
+          [
+            "aws redshift create-endpoint-access --cluster-identifier mwaa-redshift-cluster --resource-owner 704533066374 --endpoint-name mwaa-redshift-endpoint --subnet-group-name ",
+            {
+              "Ref": "MWAAVPERedshiftCSG"
+            },
+            " --vpc-security-group-ids sg-0f920a406d470ae35"
+          ]
+        ]
+      }
+    }
+  }
+}
