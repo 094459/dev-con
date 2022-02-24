@@ -40,6 +40,8 @@ You can now access the Apache Airflow UI by accessing http://localhost:8080 on y
 
 Follow the instructions in [this blog post](https://dev.to/aws/working-with-the-redshifttos3transfer-operator-and-amazon-managed-workflows-for-apache-airflow-56n9) to build the environment and create the DAG which will be our data pipeline.
 
+The original post was done using Apache Airflow 1.12, and the code within this Repo is updated to use Apache Airflow 2.0.2, and fix a typo in the original clean script.
+
 > Note! This is the demo used in the presentation at Devcon. It has been updated so that it works with later versions of Apache Airflow. The principal changes being the changes to the Airflow providers (so the import statements)
 
 
